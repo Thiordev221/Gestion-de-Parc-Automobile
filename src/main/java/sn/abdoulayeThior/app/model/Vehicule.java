@@ -2,19 +2,40 @@ package sn.abdoulayeThior.app.model;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class Vehicule {
     private String immatriculation;
     private String marque;
+    private int kilometrage;
     private TypeVehicule type;
     private Disponibilite etat;
+    private int coutEntretien;
+
+    public int getKilometrage() {
+        return kilometrage;
+    }
+
     private Calendar dateFabrication;
 
-    public Vehicule(String immatriculation, String marque, TypeVehicule type, Disponibilite etat, Calendar dateFabrication) {
+    @Override
+    public String toString() {
+        return "Vehicule{" +
+                "immatriculation='" + immatriculation + '\'' +
+                ", marque='" + marque + '\'' +
+                ", type=" + type +
+                ", etat=" + etat +
+                ", dateFabrication=" + dateFabrication +
+                '}';
+    }
+
+    public Vehicule(String immatriculation, String marque, TypeVehicule type, int kilometrage, Disponibilite etat, int coutEntretien, Calendar dateFabrication) {
         this.immatriculation = immatriculation;
         this.marque = marque;
+        this.kilometrage = kilometrage;
         this.type = type;
         this.etat = etat;
+        this.coutEntretien = coutEntretien;
         this.dateFabrication = dateFabrication;
     }
 
@@ -38,12 +59,27 @@ public class Vehicule {
         return immatriculation;
     }
 
+    public int getCoutEntretien() {
+        return coutEntretien;
+    }
+
     public void setImmatriculation(String immatriculation) {
         this.immatriculation = immatriculation;
     }
 
     public void setMarque(String marque) {
         this.marque = marque;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Vehicule vehicule)) return false;
+        return Objects.equals(immatriculation, vehicule.immatriculation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(immatriculation);
     }
 
     public void setType(TypeVehicule type) {
